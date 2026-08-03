@@ -44,3 +44,13 @@ model2.fit(X_train2, y_train2)
 print(f"Accuracy (time-based split): {model2.score(X_test2, y_test2):.2%}")
 
 print(X_train2.index[-1])
+
+data["day_of_week"] = data.index.dayofweek
+
+avg_return_by_day = data.groupby("day_of_week")["daily_return"].mean()
+print(avg_return_by_day)
+
+day_names = {0: "Monday", 1: "Tuesday",
+             2: "Wednesday", 3: "Thursday", 4: "Friday"}
+avg_return_by_day.index = avg_return_by_day.index.map(day_names)
+print(avg_return_by_day)
